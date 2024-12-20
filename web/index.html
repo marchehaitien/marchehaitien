@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Si vous servez votre application Web depuis un chemin autre que la racine, ajustez cette valeur -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Une nouvelle application Flutter Web">
+
+  <!-- Meta tags et icônes pour iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="marchehaitien">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>marchehaitien</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Import des bibliothèques Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"></script>
+</head>
+<body>
+  <!-- Le script Flutter pour le bootstrap de l'app -->
+  <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Initialisation Firebase -->
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyCtET3SeM8SaEgj4bwx6yVGgDcEyI-Rf74",
+  authDomain: "marche-95a17.firebaseapp.com",
+  projectId: "marche-95a17",
+  storageBucket: "marche-95a17.firebasestorage.app",
+  messagingSenderId: "471392711052",
+  appId: "1:471392711052:web:725750126392b365ca26a9",
+  measurementId: "G-8GCS0TN6YG"
+};
+
+    // Initialiser Firebase avec la configuration fournie
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</body>
+</html>

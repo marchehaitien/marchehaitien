@@ -1,0 +1,63 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "com.google.gms.google-services" // Plugin pour Firebase
+}
+
+// Intégration du script Gradle de Flutter
+def flutterRoot = rootProject.projectDir.parentFile.toPath().resolve("flutter")
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    namespace = "com.example.marchehaitien" // Nom de votre package
+    compileSdk = 34 // Version SDK pour compilation
+
+    defaultConfig {
+        applicationId "com.example.marchehaitien" // Identifiant unique de l'application
+        minSdk = 23 // Version minimale compatible
+        targetSdk = 34 // Version SDK cible
+        versionCode 1  // Numéro de version
+        versionName "1.0"  // Nom de version
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true // Réduction des ressources inutilisées pour un build optimisé
+            minifyEnabled true // Activation de la minimisation pour les builds release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false // Désactivez la minimisation pour faciliter le débogage
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 // Utilisation de Java 8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Compatibilité Kotlin
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}" // Exclut des fichiers conflictuels
+        }
+    }
+}
+
+dependencies {
+    // Plateforme BOM Firebase pour la gestion automatique des versions
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+
+    // Modules Firebase nécessaires
+    implementation 'com.google.firebase:firebase-auth'        // Authentification Firebase
+    implementation 'com.google.firebase:firebase-firestore'   // Firestore
+    implementation 'com.google.firebase:firebase-storage'     // Firebase Storage
+    implementation 'com.google.firebase:firebase-database'    // Realtime Database
+
+    // Autres dépendances nécessaires
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0" // Kotlin Standard Library
+    implementation 'androidx.core:core-ktx:1.12.0'            // Extensions pour Android
+}
