@@ -1,63 +1,67 @@
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "com.google.gms.google-services" // Plugin pour Firebase
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1'
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10"
+    }
 }
 
-// Intégration du script Gradle de Flutter
-def flutterRoot = rootProject.projectDir.parentFile.toPath().resolve("flutter")
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+}
 
 android {
-    namespace = "com.example.marchehaitien" // Nom de votre package
-    compileSdk = 34 // Version SDK pour compilation
+    namespace = "com.example.marchehaitien"
+    compileSdkVersion 34
 
     defaultConfig {
-        applicationId "com.example.marchehaitien" // Identifiant unique de l'application
-        minSdk = 23 // Version minimale compatible
-        targetSdk = 34 // Version SDK cible
-        versionCode 1  // Numéro de version
-        versionName "1.0"  // Nom de version
+        applicationId "com.example.marchehaitien"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
-            shrinkResources true // Réduction des ressources inutilisées pour un build optimisé
-            minifyEnabled true // Activation de la minimisation pour les builds release
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false // Désactivez la minimisation pour faciliter le débogage
+            minifyEnabled false
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8 // Utilisation de Java 8
+        sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "1.8" // Compatibilité Kotlin
+        jvmTarget = "1.8"
     }
 
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}" // Exclut des fichiers conflictuels
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
 
 dependencies {
-    // Plateforme BOM Firebase pour la gestion automatique des versions
     implementation platform('com.google.firebase:firebase-bom:32.2.2')
-
-    // Modules Firebase nécessaires
-    implementation 'com.google.firebase:firebase-auth'        // Authentification Firebase
-    implementation 'com.google.firebase:firebase-firestore'   // Firestore
-    implementation 'com.google.firebase:firebase-storage'     // Firebase Storage
-    implementation 'com.google.firebase:firebase-database'    // Realtime Database
-
-    // Autres dépendances nécessaires
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0" // Kotlin Standard Library
-    implementation 'androidx.core:core-ktx:1.12.0'            // Extensions pour Android
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-database'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.10"
+    implementation 'androidx.core:core-ktx:1.12.0'
 }
